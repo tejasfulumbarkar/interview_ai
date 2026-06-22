@@ -6,13 +6,18 @@ const userSchema = mongoose.Schema({
     username:{
         type:String,
         unique:[true,"username already taken"],
-        required = true
+        required: true
     },
 
     email:{
         type:String,
         unique:true,
-        required = true
+        required: true
+    },
+
+    password:{
+        type:String,
+        required:true
     }
 
 
@@ -21,3 +26,5 @@ const userSchema = mongoose.Schema({
 
 
 const userModel = mongoose.model("users",userSchema);
+
+module.exports = userModel;
