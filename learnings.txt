@@ -1,1 +1,10 @@
 when you use npm create vite@latest . , this . says crate react project in the already existing current folder instead of creating a new folder 
+
+
+padding inline is used for horizontal padding 
+and padding bloack is used for vertical padding 
+
+
+
+use <Link> </Link> tag when you want to redirect user to some page when they click
+use navigate when you want to redirect user to some page without the user clicking , that means auto redirect based on code , code will decide 
