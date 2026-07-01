@@ -1,13 +1,29 @@
 import React from 'react'
 import { useNavigate ,Link } from 'react-router'
 import '../auth.form.scss'
+import { useAuth } from '../hooks/useAuth'
+import { register } from '../services/auth.api'
+import { useState } from 'react'
+const Register = () => {
 
-const Login = () => {
 
-  const handleSubmit = (e)=>{
+ const navigate = useNavigate()
 
+  const {loading , handleRegister} = useAuth()
+  const [username,setUsername] = useState("")
+  const [email,setEmail] = useState("")
+  const [password, setpassword] = useState("")
+
+  const handleSubmit = async(e)=>{
     e.preventDefault()
 
+    await handleRegister({username,email,password})
+    navigate('/')
+
+  }
+
+   if(loading){
+    return (<main><h1>Loading ......</h1></main>)
   }
   return (
    <main>
@@ -21,17 +37,26 @@ const Login = () => {
 
           <div className="input-group">
           <label htmlFor="username">Username</label>
-          <input type='text' id="username" name='username' placeholder='Enter Username'/>
+          <input
+          onChange={(e)=>{setUsername(e.target.value)}}
+          type='text' id="username" name='username' placeholder='Enter Username'/>
         </div>
 
         <div className="input-group">
           <label htmlFor="email">Email</label>
-          <input type='email' id="email" name='email' placeholder='Enter Email Address'/>
+          <input
+
+          onChange={(e)=>{setEmail(e.target.value)}}
+          
+          type='email' id="email" name='email' placeholder='Enter Email Address'/>
         </div>
 
           <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input type='password' id="password" name='password' placeholder='Enter Email Address'/>
+          <input
+          onChange={(e)=>{setpassword(e.target.value)}}
+          
+          type='password' id="password" name='password' placeholder='Enter Email Address'/>
         </div>
         </div>
 
@@ -45,4 +70,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

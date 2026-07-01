@@ -8,3 +8,11 @@ and padding bloack is used for vertical padding
 
 use <Link> </Link> tag when you want to redirect user to some page when they click
 use navigate when you want to redirect user to some page without the user clicking , that means auto redirect based on code , code will decide 
+
+
+React project should be done in four layer 
+
+1 UI (pages )
+2.hooks 
+3.state (contexts )
+4.services( to talk with backend )
