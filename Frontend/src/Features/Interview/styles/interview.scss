@@ -267,12 +267,14 @@
   white-space: nowrap;
 }
 
-.accordion-list {
+.accordion-list,
+.main-roadmap {
   display: grid;
   gap: 0.65rem;
 }
 
-.accordion-card {
+.accordion-card,
+.roadmap-card {
   overflow: hidden;
   border-radius: 0.8rem;
   background: rgba(11, 15, 22, 0.98);
@@ -455,9 +457,6 @@
 }
 
 .main-roadmap {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.8rem;
   width: 100%;
 }
 
@@ -465,10 +464,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  padding: 1rem 1.05rem 1.1rem;
-  border-radius: 0.8rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.95rem 1rem;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(20, 184, 166, 0.22);
+  background: rgba(17, 23, 35, 0.98);
 }
 
 .roadmap-day {
