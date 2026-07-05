@@ -1,11 +1,20 @@
-import { useContext ,useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../auth.context";
-import {login , register , logout , getMe} from "../services/auth.api"
+import {login , register , logout } from "../services/auth.api"
 
 
 export const useAuth = ()=>{
 
     const context  = useContext(AuthContext)
+    if (!context) {
+        return {
+            user: null,
+            loading: false,
+            handleLogin: async () => null,
+            handleRegister: async () => null,
+            handleLogout: async () => null
+        }
+    }
     const {user,setUser , loading ,setLoading} = context
 
 
@@ -15,9 +24,11 @@ export const useAuth = ()=>{
         try {
         const data = await login({email,password})
         setUser(data.user)
+        localStorage.setItem('auth_user', JSON.stringify(data.user))
+        return data.user
             
         } catch (error) {
-            
+            throw error
         }
         finally{
             setLoading(false)
@@ -33,11 +44,13 @@ export const useAuth = ()=>{
           setLoading(true)
         try {
            
-        const data =await  register({username , email ,pasword}) 
+        const data =await  register({username , email ,password}) 
         setUser(data.user)
+        localStorage.setItem('auth_user', JSON.stringify(data.user))
+        return data.user
             
         } catch (error) {
-            
+            throw error
         } finally{
                setLoading(false)
 
@@ -53,11 +66,13 @@ export const useAuth = ()=>{
 
         setLoading(true)
         try {
-        const data = await logout()
+        await logout()
         setUser(null)
+        localStorage.removeItem('auth_user')
             
         } catch (error) {
-            
+            throw error
+
         } finally{
 
             setLoading(false)
@@ -65,19 +80,6 @@ export const useAuth = ()=>{
         }
 
     }
-
-     useEffect(()=>{
-        const getAndSetUser = async ()=>{
-
-            const data = await getMe()
-            setUser(data.user)
-            setLoading(false)
-
-        }
-
-        getAndSetUser()
-
-    },[])
 
 
            return {user, loading , handleLogin , handleRegister , handleLogout}
